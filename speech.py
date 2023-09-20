@@ -102,3 +102,4 @@ class ToText():
         local_file_path = f"./translated_audio/{self.audio_file.split('.')[0]}.mp3"
         # Download the file to the specified local file path
         blob.download_to_filename(local_file_path)
+        return local_file_path

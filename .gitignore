@@ -165,5 +165,7 @@ audio/
 video_download/
 video_downloaded/
 translated_audio/
+video_input/
+done/
 .env
 
