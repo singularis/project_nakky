@@ -38,7 +38,6 @@ class ToText():
         logging.info('Waiting for operation to complete...')
         response = operation.result()
         translation = []
-        # Print the recognition results
         for result in response.results:
             alternative = result.alternatives[0]
             translation.append(alternative.transcript)
@@ -51,6 +50,5 @@ class ToText():
         # Create a blob (file) in the bucket
         blob = bucket.blob(text_file_name)
         # Write the string to the blob as text
-        print(f"self.full_translation: {self.full_translation}")
         blob.upload_from_string(self.full_translation, content_type='text/plain;charset=utf-8')
         logging.info(f'String has been written to gs://{self.bucket_name}/{text_file_name}')
