@@ -28,8 +28,11 @@ translator = Translator(project_id, bucket_name, "en")
 # download_file = youtuber.download_audio(video_link, audio_path)
 # text_payload = speech_to_text.speech_to_text(audio_path=audio_path, download_file=download_file, language_code="ru-RU") # en-US ru-RU
 # speech_to_text.write_translation_text_file()
-download_file = "audio_input"
-translator.read_original_text(download_file)
-translator.translate()
-translator.write_translation_to_bucket()
+translate_file = "audio_input_translate.txt"
+# translator.read_original_text(download_file)
+# translator.translate()
+# translate_file = translator.write_translation_to_bucket()
+speech_to_text.read_translated_text(translate_file)
+speech_to_text.text_to_speech()
+
 # video_convertor.split_to_audio(download_file)

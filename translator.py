@@ -25,3 +25,4 @@ class Translator():
         target_blob = target_bucket.blob(f"{self.input_file_name}_translate.txt")
         # Upload the translated content to Google Cloud Storage
         target_blob.upload_from_string(self.translated_content['translatedText'], content_type='text/plain;charset=utf-8')
+        return f"{self.input_file_name}_translate.txt"
