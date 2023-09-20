@@ -37,9 +37,6 @@ class Video_convertor:
         # Load the video and audio clips
         video_clip = VideoFileClip(input_video_path)
         audio_clip = AudioFileClip(input_audio_path)
-        # self.adjust_video_duration(input_audio_path)
-        print(video_clip.duration)
-        print(audio_clip.duration)
         speed_corelation = video_clip.duration/audio_clip.duration
         logging.info(f"Speed of video increased for: {speed_corelation}")
         adjusted_video_clip = video_clip.speedx(speed_corelation)

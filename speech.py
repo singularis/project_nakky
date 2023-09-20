@@ -5,9 +5,10 @@ from google.cloud import speech
 from google.cloud import texttospeech
 
 class ToText():
-    def __init__(self, project_id, bucket_name):
+    def __init__(self, project_id, bucket_name, voice_type):
         self.project_id =project_id
         self.bucket_name = bucket_name
+        self.voice_type = voice_type
         self.full_translation = []
         self.audio_file = ""
         self.file_path = ""
@@ -72,7 +73,7 @@ class ToText():
         )
 
         voice = texttospeech.VoiceSelectionParams(
-            language_code="en-US", name="en-US-Standard-A"
+            language_code="en-US", name=self.voice_type
         )
 
         parent = f"projects/{self.project_id}/locations/us-central1"

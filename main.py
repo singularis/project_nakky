@@ -14,13 +14,14 @@ audio_path = "audio"
 video_path = "video_input"
 output_path = "done"
 resolution = "1080p"
+voice_type = "en-US-Studio-M"
 project_id = os.getenv("PROJECT_ID")
 video_link = os.getenv("VIDEO_LINK")
 bucket_name = os.getenv("BUCKET_NAME")
 
 youtuber = Youtuber(resolution)
 video_convertor= Video_convertor(download_path, audio_path, video_path, output_path)
-speech_to_text = ToText(project_id, bucket_name)
+speech_to_text = ToText(project_id, bucket_name, voice_type)
 translator = Translator(project_id, bucket_name, "en")
 
 
