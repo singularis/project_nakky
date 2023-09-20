@@ -164,3 +164,5 @@ cython_debug/
 audio/
 video_download/
 video_downloaded/
+.env
+
