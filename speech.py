@@ -61,27 +61,6 @@ class ToText():
         self.translate_source_content = source_blob.download_as_text()
         print(self.translate_source_content)
     def text_to_speech(self):
-        # client = texttospeech.TextToSpeechLongAudioSynthesizeClient()
-        # synthesis_input = texttospeech.SynthesisInput(text=self.translate_source_content)
-        # voice = texttospeech.VoiceSelectionParams(
-        #     language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
-        # )
-
-        # # Select the type of audio file you want returned
-        # audio_config = texttospeech.AudioConfig(
-        #     audio_encoding=texttospeech.AudioEncoding.MP3
-        # )
-
-        # # Perform the text-to-speech request on the text input with the selected
-        # # voice parameters and audio file type
-        # response = client.synthesize_speech(
-        #     input=synthesis_input, voice=voice, audio_config=audio_config
-        # )
-        # # The response's audio_content is binary.
-        # with open("output.mp3", "wb") as out:
-        #     # Write the response to the output file.
-        #     out.write(response.audio_content)
-        #     print('Audio content written to file "output.mp3"')
         client = texttospeech.TextToSpeechLongAudioSynthesizeClient()
 
         input = texttospeech.SynthesisInput(
@@ -107,10 +86,19 @@ class ToText():
         )
 
         operation = client.synthesize_long_audio(request=request)
-        # Set a deadline for your LRO to finish. 300 seconds is reasonable, but can be adjusted depending on the length of the input.
-        # If the operation times out, that likely means there was an error. In that case, inspect the error, and try again.
         result = operation.result(timeout=300)
         print(
             "\nFinished processing, check your GCS bucket to find your audio file! Printing what should be an empty result: ",
             result,
         )
+    def download_converted_file(self):
+        # Initialize a GCS client
+        storage_client = storage.Client()
+        # Get a bucket reference
+        bucket = storage_client.bucket(self.bucket_name)
+        # Get a blob (file) reference
+        blob = bucket.blob(f"{self.audio_file.split('.')[0]}_translated.mp3")
+        # Specify the local file path where you want to save the downloaded file
+        local_file_path = f"./translated_audio/{self.audio_file.split('.')[0]}.mp3"
+        # Download the file to the specified local file path
+        blob.download_to_filename(local_file_path)

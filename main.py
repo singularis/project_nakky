@@ -32,7 +32,8 @@ translate_file = "audio_input_translate.txt"
 # translator.read_original_text(download_file)
 # translator.translate()
 # translate_file = translator.write_translation_to_bucket()
-speech_to_text.read_translated_text(translate_file)
-speech_to_text.text_to_speech()
+# speech_to_text.read_translated_text(translate_file)
+# speech_to_text.text_to_speech()
+# speech_to_text.download_converted_file()
 
 # video_convertor.split_to_audio(download_file)
