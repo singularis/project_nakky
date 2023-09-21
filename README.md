@@ -4,15 +4,15 @@
 
 ## Pass youtube video link and receive back translate video
 
-#Needed apis: speech.googleapis.com,  texttospeech.googleapis.com, translate.googleapis.com
+# Needed apis: speech.googleapis.com,  texttospeech.googleapis.com, translate.googleapis.com
 
-#How to start:
+# How to start:
 
 Authenticate to your GCP account
 
-`gcloud init``
+`gcloud init`
 
-`gcloud auth application-default login``
+`gcloud auth application-default login`
 
 Enable apis: speech.googleapis.com,  texttospeech.googleapis.com, translate.googleapis.com
 
