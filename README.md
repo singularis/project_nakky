@@ -1,12 +1,12 @@
 # project_nakky
 
-## Translate any youtube video to any language  and dictate it back via speech to text.
+# Translate any youtube video to any language  and dictate it back via speech to text.
 
-## Pass youtube video link and receive back translate video
+# Pass youtube video link and receive back translate video
 
-# Needed apis: speech.googleapis.com,  texttospeech.googleapis.com, translate.googleapis.com
+## Needed apis: speech.googleapis.com,  texttospeech.googleapis.com, translate.googleapis.com
 
-# How to start:
+## How to start:
 
 Authenticate to your GCP account
 
