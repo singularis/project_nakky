@@ -37,7 +37,7 @@ class ToText():
 
         # Detects speech in the audio file
         operation = client.long_running_recognize(config=config, audio=audio)
-        logging.info('Waiting for operation to complete...')
+        logging.info('Waiting for audio recognition to complete...')
         response = operation.result()
         translation = []
         for result in response.results:
@@ -60,7 +60,6 @@ class ToText():
         source_blob = source_bucket.blob(input_file_name)
         # Read the content of the source file
         self.translate_source_content = source_blob.download_as_text()
-        print(self.translate_source_content)
     def text_to_speech(self):
         client = texttospeech.TextToSpeechLongAudioSynthesizeClient()
 
