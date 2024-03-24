@@ -168,4 +168,5 @@ translated_audio/
 video_input/
 done/
 .env
-
+secrets.yaml
+.idea/
