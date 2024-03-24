@@ -38,7 +38,7 @@ class ToText():
         # Detects speech in the audio file
         operation = client.long_running_recognize(config=config, audio=audio)
         logging.info('Waiting for audio recognition to complete...')
-        response = operation.result()
+        response = operation.result(timeout=3600)
         translation = []
         for result in response.results:
             alternative = result.alternatives[0]
@@ -86,7 +86,7 @@ class ToText():
         )
 
         operation = client.synthesize_long_audio(request=request)
-        result = operation.result(timeout=300)
+        response = operation.result(timeout=3600)
         print(
             "\nFinished processing, check your GCS bucket to find your audio file! Printing what should be an empty result: ",
             result,
@@ -103,3 +103,37 @@ class ToText():
         # Download the file to the specified local file path
         blob.download_to_filename(local_file_path)
         return local_file_path
+
+    def cleanup_bucket(self):
+        try:
+            storage_client = storage.Client()
+            bucket = storage_client.bucket(self.bucket_name)
+            blobs = bucket.list_blobs()
+            for blob in blobs:
+                blob.delete()
+                logging.info(f"Deleted blob: {blob.name} from bucket: {self.bucket_name}")
+            logging.info("Completed cleanup of the bucket.")
+        except Exception as e:
+            logging.error(f"Failed to clean up the bucket: {e}")
+
+    def download_all_files_from_bucket(self, download_directory):
+        if not os.path.exists(download_directory):
+            os.makedirs(download_directory, exist_ok=True)
+
+        # Initialize a GCS client
+        storage_client = storage.Client()
+        # Get a bucket reference
+        bucket = storage_client.bucket(self.bucket_name)
+
+        # List all objects in the bucket
+        blobs = bucket.list_blobs()
+        for blob in blobs:
+            # Define a local filename to save the downloaded file
+            local_file_path = os.path.join(download_directory, blob.name)
+
+            # Create directories if they do not exist
+            os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+
+            # Download the file to the specified local file path
+            blob.download_to_filename(local_file_path)
+            logging.info(f"Downloaded {blob.name} to {local_file_path}")

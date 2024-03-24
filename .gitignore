@@ -170,3 +170,6 @@ done/
 .env
 secrets.yaml
 .idea/
+.uuid
+bucket_full_backup/
+secrets*

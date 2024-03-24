@@ -6,3 +6,4 @@ pytube==15.0.0
 google-cloud-speech
 google-cloud-storage
 google-cloud-texttospeech
+ffmpeg-python
